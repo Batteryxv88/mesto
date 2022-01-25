@@ -1,0 +1,16 @@
+.profile__group {
+  display: flex;
+  justify-self: start;
+}
+
+@media screen and (max-width: 708px) {
+  .profile__group {
+    margin: 22.5px 0 0;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .profile__group {
+    justify-content: center;
+  }
+}

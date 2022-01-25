@@ -1,0 +1,29 @@
+.add-button {
+  display: flex;
+  width: 146px;
+  height: 46px;
+  background-color: #000;
+  border: 2px solid #fff;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  transition: opacity .2s linear;
+}
+
+.add-button:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 708px) {
+  .add-button {
+    width: 340px;
+    margin: 36px 0 0;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .add-button {
+    width: 87%;
+  }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+
+<body class="page">
+  <header class="header">
+    <div class="header__logo"></div>
+  </header>
+  <section class="profile">
+    <div class="profile__avatar"></div>
+    <div class="profile__group">
+      <div class="profile-info">
+        <h1 class="profile-info__title">Жак-Ив Кусто</h1>
+        <p class="profile-info__subtitle">Исследователь океана</p>
+      </div>
+      <a href="#" class="edit-button">
+        <img class="edit-button__pen" src="./images/pen/Vector.svg" alt="карандаш.">
+      </a>
+    </div>
+    <a href="#" class="add-button">
+      <img class="add-button__cross" src="images/button/Vector.svg" alt="плюсик.">
+    </a>
+  </section>
+  <section class="elements">
+    <div class="element">
+      <img class="element__image" src="./images/element/image1.jpg" alt="старая церковь на фоне гор.">
+      <div class="group">
+        <h2 class="group__title">Карачаевск</h2>
+        <div class="group__like"></div>
+      </div>
+    </div>
+    <div class="element">
+      <img class="element__image" src="./images/element/image2.jpg"
+        alt="кусты на песчанном ландшафте. на заднем поаге горы.">
+      <div class="group">
+        <h2 class="group__title">Гора Эльбрус</h2>
+        <div class="group__like"></div>
+      </div>
+    </div>
+    <div class="element">
+      <img class="element__image" src="./images/element/image3.jpg" alt="горы. на переднем плане деревья.">
+      <div class="group">
+        <h2 class="group__title">Домбай</h2>
+        <div class="group__like"></div>
+      </div>
+    </div>
+    <div class="element">
+      <img class="element__image" src="./images/element/image2.jpg"
+        alt="кусты на песчанном ландшафте. на заднем поаге горы.">
+      <div class="group">
+        <h2 class="group__title">Гора Эльбрус</h2>
+        <div class="group__like"></div>
+      </div>
+    </div>
+    <div class="element">
+      <img class="element__image" src="./images/element/image3.jpg" alt="горы. на переднем плане деревья.">
+      <div class="group">
+        <h2 class="group__title">Домбай</h2>
+        <div class="group__like"></div>
+      </div>
+    </div>
+    <div class="element">
+      <img class="element__image" src="./images/element/image1.jpg" alt="старая церковь на фоне гор.">
+      <div class="group">
+        <h2 class="group__title">Карачаево-Черкессия</h2>
+        <div class="group__like"></div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
+  </footer>
+  <div class="popup">
+
+    <div class="popup__container">
+      <form class="form">
+        <h2 class="form__title">Редактировать профиль</h2>
+        <input type="text" value="Жак-Ив Кусто" class="form__field-1">
+        <input type="text" value="Исследователь океана" class="form__field-2">
+        <a href="#" class="form__submit-button">Сохранить</a>
+        <a href="#">
+          <img class="form__close-icon" src="./images/close-icon/Close-Icon.svg" alt="крестик.">
+        </a>
+      </form>
+    </div>
+  </div>
+  <script src="./pages/script.js"></script>
+</body>
+
+</html>

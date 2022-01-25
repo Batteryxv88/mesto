@@ -1,0 +1,8 @@
+.element {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  z-index: 1;
+  overflow: hidden;
+}
