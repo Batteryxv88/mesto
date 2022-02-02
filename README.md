@@ -13,4 +13,4 @@ HTML, CSS, JavaScript
 
 ## Ссылка:
 
-https://github.com/Batteryxv88/mesto
+https://batteryxv88.github.io/mesto/index.html
