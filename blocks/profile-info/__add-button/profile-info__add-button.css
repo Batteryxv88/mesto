@@ -1,6 +1,6 @@
 .profile-info__add-button {
   width: 146px;
-  height: 46px;
+  height: 50px;
   background-color: #000;
   border: 2px solid #fff;
   margin: 0;
@@ -11,6 +11,7 @@
   background-repeat: no-repeat;
   transition: opacity .2s linear;
   cursor: pointer;
+  border-radius: 1px;
 }
 
 .profile-info__add-button:hover {
@@ -26,6 +27,7 @@
 
 @media screen and (max-width: 380px) {
   .profile-info__add-button {
-    width: 87%;
+    width: 88%;
+    background-size: 6%;
   }
 }

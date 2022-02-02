@@ -22,9 +22,9 @@
           <h1 class="profile-info__title">Жак-Ив Кусто</h1>
           <p class="profile-info__subtitle">Исследователь океана</p>
         </div>
-        <button class="profile-info__edit-button" type="menu"></button>
+        <button class="profile-info__edit-button" type="button"></button>
       </div>
-      <button class="profile-info__add-button" type="menu"></button>
+      <button class="profile-info__add-button" type="button"></button>
     </section>
     <section class="elements">
       <div class="element">
@@ -81,14 +81,13 @@
     <div class="popup__container">
       <form class="form" name="editProfileForm">
         <h2 class="form__title">Редактировать профиль</h2>
-        <input type="text" value="Жак-Ив Кусто" class="form__field-1">
-        <input type="text" value="Исследователь океана" class="form__field-2">
-        <a href="#" class="form__submit-button">Сохранить</a>
-        <a href="#">
-          <img class="form__close-icon" src="./images/close-icon/Close-Icon.svg" alt="крестик.">
-        </a>
+        <input type="text" name="formName" value="Жак-Ив Кусто" class="form__field form__field_value_name">
+        <input type="text" name="formJob" value="Исследователь океана" class="form__field form__field_value_job">
+        <button class="form__submit-button" type="submit">Сохранить</button>
       </form>
+      <button class="popup__close-icon" type="button"></button>
     </div>
+
   </div>
   <script src="./script/index.js"></script>
 </body>

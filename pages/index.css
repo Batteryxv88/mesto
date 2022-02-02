@@ -21,10 +21,9 @@
 @import url(../blocks/profile-info/__add-button/profile-info__add-button.css);
 @import url(../blocks/profile/__group/profile__group.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
-@import url(../blocks/add-button/__cross/add-button__cross.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/form/__title/form__title.css);
-@import url(../blocks/form/__field-1/form__field-1.css);
-@import url(../blocks/form/__field-2/form__field-2.css);
+@import url(../blocks/form/__field/form__field.css);
 @import url(../blocks/form/__submit-button/form__submit-button.css);
-@import url(../blocks/form/__close-icon/form__close-icon.css);
+@import url(../blocks/popup/__close-icon/popup__close-icon.css);
+@import url(../blocks/popup/_active/popup_active.css);

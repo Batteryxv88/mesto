@@ -1,9 +1,11 @@
 .element__group {
   display: flex;
   max-width: 246px;
+  width: 100%;
   height: 79px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
 }
