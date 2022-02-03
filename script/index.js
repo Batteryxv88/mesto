@@ -1,10 +1,10 @@
 let popup = document.querySelector('.popup');
-let formOpenButton = document.querySelector('.profile-info__edit-button');
+let formOpenButton = document.querySelector('.profile__edit-button');
 let closeButton = document.querySelector('.popup__close-icon');
 let nameInput = document.querySelector('.form__field_value_name');
 let jobInput = document.querySelector('.form__field_value_job');
-let nameOutput = document.querySelector('.profile-info__title');
-let jobOutput = document.querySelector('.profile-info__subtitle');
+let nameOutput = document.querySelector('.profile__title');
+let jobOutput = document.querySelector('.profile__subtitle');
 let form = document.querySelector('.form');
 
 function fillEditForm() {
