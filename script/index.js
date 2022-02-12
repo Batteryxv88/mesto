@@ -32,12 +32,12 @@ const inputLink = document.querySelector('.form__field_value_link');
 const formAdd = document.querySelector('.form_type_add');
 const title = document.querySelector('.element__title');
 
-document.querySelector('.elements')
-.addEventListener('click', event => {
-  if (event.target.className === 'element__like') {
-    event.target.classList.toggle('element__like_active');
-  }
-});
+//document.querySelector('.elements')
+//.addEventListener('click', event => {
+ // if (event.target.className === 'element__like') {
+  //  event.target.classList.toggle('element__like_active');
+ /// }
+//});
 
 
 
@@ -57,20 +57,25 @@ function renderItem(item) {
   elements.appendChild(box)
 };
 
-function addListeners(el) {
+function addListeners(el, data) {
   el.querySelector('.element__trash').addEventListener('click', handleDelete)
-  //el.querySelector('.profile__add-button').addEventListener('click', handleAdd)
-  //el.querySelector('.element__like').addEventListener('click', handleLike)
+  el.querySelector('.element__like').addEventListener('click', elementLike);
+};
+
+/*
+function openPopupPic() {   // Открытие попапа Add
+  popupPicBox.classList.add('popup-pic_active')
+};
+*/
+function elementLike(event) {
+  event.target.closest('.element__like').classList.toggle('element__like_active');
 }
 
 function handleDelete(event) {
   event.target.closest('.element').remove();
-  //resetForm();
-}
+};
 
 
-
-//function handleAdd()
 
 function fillAddForm() {    // Вставляем данные из формы в профиль
   const box = template.cloneNode(true);
@@ -82,20 +87,14 @@ render();
 const popupPicBox = document.querySelector('.popup-pic');
 const popupImg = document.querySelector('.popup-pic__img');
 const cardImage = document.querySelector('.element__image');
+const allCards = document.querySelector('.elements');
 
-function fillPicPopup() {    // Вставляем картинку и текст в попап =======================================
-  nameOutput.textContent = nameInput.value
-  jobOutput.textContent = jobInput.value
-};
-
-document.querySelector('.elements')  // Открытие картинки попапа
-.addEventListener('click', event => {
+allCards.addEventListener('click', event => {            // Открытие картинки попапа
   if (event.target.className === 'element__image') {
     popupPicBox.classList.add('popup-pic_active');
+    popupImg.src = event.link;
   }
-  popupImg.textContent = cardImage.src
 });
-
 
 
 let popupEdit = document.querySelector('.popup_form_edit');

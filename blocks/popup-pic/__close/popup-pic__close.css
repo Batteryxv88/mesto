@@ -1,5 +1,6 @@
 .popup-pic__close {
-  position: relative;
+  position: absolute;
+  float: right;
   width: 32px;
   height: 32px;
   background-image: url(../../../images/close-icon/Close-Icon.svg);
@@ -7,6 +8,8 @@
   background-repeat: no-repeat;
   border: none;
   background-color: transparent;
-  top: 100px;
-  right: -100px;
+  top: -40px;
+  right: -40px;
+  cursor: pointer;
+  z-index: 4;
 }

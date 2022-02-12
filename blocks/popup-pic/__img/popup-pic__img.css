@@ -1,3 +1,5 @@
 .popup-pic__img {
+  max-width: 816px;
+  object-fit: contain;
   margin: 0 auto;
 }
