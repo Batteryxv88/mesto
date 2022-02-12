@@ -1,0 +1,11 @@
+.popup-pic__box {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  position: relative;
+  max-width: 816px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  z-index: 3;
+}

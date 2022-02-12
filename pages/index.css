@@ -8,6 +8,8 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/popup-pic/popup-pic.css);
+@import url(../blocks/element/__trash/element__trash.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/element/__group/element__group.css);
@@ -27,3 +29,10 @@
 @import url(../blocks/form/__submit-button/form__submit-button.css);
 @import url(../blocks/popup/__close-icon/popup__close-icon.css);
 @import url(../blocks/popup/_active/popup_active.css);
+@import url(../blocks/element/__like/_active/element__like_active.css);
+@import url(../blocks/popup-pic/__close/popup-pic__close.css);
+@import url(../blocks/popup-pic/__group/popup-pic__group.css);
+@import url(../blocks/popup-pic/__img/popup-pic__img.css);
+@import url(../blocks/popup-pic/__label/popup-pic__label.css);
+@import url(../blocks/popup-pic/__box/popup-pic__box.css);
+@import url(../blocks/popup-pic/_active/popup-pic_active.css);
