@@ -1,8 +1,0 @@
-.popupImg_active {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  visibility: visible;
-  opacity: 1;
-  transition: .4s all;
-}

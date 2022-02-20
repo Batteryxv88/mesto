@@ -1,6 +1,6 @@
 // TEMPLATE CONST ___________________________________________
 
-const template = document.querySelector('.template').content;
+const template = document.querySelector('.card-template').content;
 
 
 // POPUP CONST ________________________________
@@ -10,23 +10,23 @@ const popup = document.querySelector('.popup');
 
 // POPUP ADD CONST __________________________________________________________
 
-const closeButtonAdd = document.querySelector('.popup__close-icon_form_add');
-const addName = document.querySelector('.form__field_add_name');
-const addLink = document.querySelector('.form__field_add_link');
+const buttonAddClose = document.querySelector('.popup__close-icon_form_add');
+const nameAdd = document.querySelector('.form__field_add_name');
+const linkAdd = document.querySelector('.form__field_add_link');
 const popupAdd = document.querySelector('.popup_form_add');
-const formOpenButtonAdd = document.querySelector('.profile__add-button');
+const buttonFormOpenAdd = document.querySelector('.profile__add-button');
 const formAdd = document.querySelector('.form_type_add');
 const elements = document.querySelector('.elements');
-const createNewCard = document.querySelector('.form__submit-button_add');
+const newCardCreate = document.querySelector('.form__submit-button_add');
 const title = document.querySelector('.element__title');
 const cardImage = document.querySelector('.element__image');
 
 
 // POPUP EDIT CONST ___________________________________________________________
 
-const closeButtonEdit = document.querySelector('.popup__close-icon_form_edit');
-const formOpenButton = document.querySelector('.profile__edit-button');
-const popupEdit = document.querySelector('.popup_form_edit');
+const buttonEditClose = document.querySelector('.popup__close-icon_form_edit');
+const buttonFormOpen = document.querySelector('.profile__edit-button');
+const popupEdit = document.querySelector('.popup_type_form-edit');
 const formEdit = document.querySelector('.form_type_edit');
 const nameInput = document.querySelector('.form__field_value_name');
 const jobInput = document.querySelector('.form__field_value_job');
@@ -36,10 +36,10 @@ const jobOutput = document.querySelector('.profile__subtitle');
 
 // POPUP IMG  CONST ______________________________________________
 
-const popupPicBox = document.querySelector('.popupImg');
-const popupImg = document.querySelector('.popupImg__img');
-const label = document.querySelector('.popupImg__label');
-const popupPicClose = document.querySelector('.popupImg__close');
+const popupPicBox = document.querySelector('.picture');
+const popupImg = document.querySelector('.popup__img');
+const label = document.querySelector('.popup__label');
+const popupPicClose = document.querySelector('.popup__close-icon_type_img');
 
 
 // TEMPLATE ___________________________________________________
@@ -60,13 +60,13 @@ function render() {
 
 //исходные карточки
 function stockCards(text) {  
-  elements.append(renderItem(text));
+  elements.prepend(renderItem(text));
 };
 
 //создание новой карточки, внесение данных
 function newCard(event) {
   event.preventDefault();
-  stockCards({ name: addName.value, link: addLink.value });
+  stockCards({ name: nameAdd.value, link: linkAdd.value });
   closePopupAdd();
 };
 
@@ -96,8 +96,8 @@ function handleDelete(event) {
 
 // попап новой карточки
 function createCard() {
-  addLink.value = "";
-  addName.value = "";
+  linkAdd.value = "";
+  nameAdd.value = "";
   popupOpen(popupAdd);
 };
 
@@ -132,11 +132,6 @@ function openPopupEdit() {
   fillInputForm()
 };
 
-// открытие попапа Image
-function openPopupImage() {
-  popupPicBox.classList.add('popup_active');
-};
-
 // закрытие попапа
 function closePopup(popup) {      
   popup.classList.remove('popup_active');
@@ -152,7 +147,7 @@ function closePopupEdit() {
   closePopup(popupEdit);
 };
 
-// закрытие попапа Picture
+// закрытие попапа Image
 function closePopupPic() {      
   popupPicBox.classList.remove('popup_active');
 };
@@ -166,10 +161,10 @@ function submitForm(evt) {
 
 // LISTENERS _____________________________________________
 
-createNewCard.addEventListener('click', newCard);
-formOpenButton.addEventListener('click', openPopupEdit);
-formOpenButtonAdd.addEventListener('click', createCard);
-closeButtonEdit.addEventListener('click', closePopupEdit);
-closeButtonAdd.addEventListener('click', closePopupAdd);
+formAdd.addEventListener('submit', newCard);
+buttonFormOpen.addEventListener('click', openPopupEdit);
+buttonFormOpenAdd.addEventListener('click', createCard);
+buttonEditClose.addEventListener('click', closePopupEdit);
+buttonAddClose.addEventListener('click', closePopupAdd);
 popupPicClose.addEventListener('click', closePopupPic);
 formEdit.addEventListener('submit', submitForm);
