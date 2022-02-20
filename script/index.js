@@ -39,7 +39,7 @@ const jobOutput = document.querySelector('.profile__subtitle');
 const popupPicBox = document.querySelector('.picture');
 const popupImg = document.querySelector('.popup__img');
 const label = document.querySelector('.popup__label');
-const popupPicClose = document.querySelector('.popup__close-icon_img');
+const popupPicClose = document.querySelector('.popup__close-img');
 
 
 // TEMPLATE ___________________________________________________
