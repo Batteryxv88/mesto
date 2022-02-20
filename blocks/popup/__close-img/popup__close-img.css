@@ -15,14 +15,14 @@
 }
 
 @media screen and (max-width: 910px) {
-  .popup__close-icon_type_img {
+  .popup__close-img {
     top: -45px;
     right: 0px;
   }
 }
 
 @media screen and (max-width: 450px) {
-  .popup__close-icon_type_img {
+  .popup__close-img {
     width: 20px;
     height: 20px;
     top: -36px;
