@@ -35,18 +35,20 @@
   </footer>
   <div class="popup popup_type_form-edit">
     <div class="popup__container">
-      <form class="form form_type_edit" name="editProfileForm">
+      <form class="form form_type_edit" name="editProfileForm" method="POST">
         <h2 class="form__title">Редактировать профиль</h2>
-        <input type="text" name="formName" value="" class="form__field form__field_value_name">
-        <input type="text" name="formJob" value="" class="form__field form__field_value_job">
-        <button class="form__submit-button form__submit-button_type_edit" type="submit">Сохранить</button>
+        <input type="text" required id="name" name="name" value="" minlength="2" maxlength="40" class="form__field form__field_value_name">
+        <span id="error-name" class="error-message error-message_visible"></span>
+        <input type="text" required id="job" name="job" value="" minlength="2" maxlength="200" class="form__field form__field_value_job">
+        <span id="error-job" class="error-message error-message_visible"></span>
+        <button id="button" class="form__submit-button form__submit-button_type_edit" type="submit">Сохранить</button>
       </form>
       <button class="popup__close-icon popup__close-icon_form_edit" type="button"></button>
     </div>
   </div>
   <div class="popup popup_form_add">
     <div class="popup__container">
-      <form class="form form_type_add" name="editProfileForm">
+      <form class="form form_type_add" name="editProfileForm" novalidate>
         <h2 class="form__title">Новое место</h2>
         <input type="text" name="formName" value="" placeholder="Название" class="form__field form__field_add_name">
         <input type="text" name="formLink" value="" placeholder="Ссылка на картинку"
@@ -80,6 +82,7 @@
 
   <script src="./script/initialCards.js"></script>
   <script src="./script/index.js"></script>
+  <script src="./script/validate.js"></script>
 
 </body>
 
