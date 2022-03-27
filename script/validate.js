@@ -15,7 +15,6 @@ const checkInputValidity = ({inputErrorClass}, form, input) => {
 
 const checkButtonValidity =({disabledButtonClass}, form, button) => {
   if (form.checkValidity()) {
-    console.log(form.checkValidity());
     button.removeAttribute('disabled');
     button.classList.remove(disabledButtonClass);        
   } else {
@@ -27,7 +26,7 @@ const checkButtonValidity =({disabledButtonClass}, form, button) => {
 
 function enableValidation({formSelector, inputSelector, buttonSelector, ...rest}) {
   const form = document.querySelector(formSelector);
-  
+
   form.addEventListener('submit', formSubmit);
     
   const inputs = form.querySelectorAll(inputSelector);
@@ -47,7 +46,14 @@ enableValidation({
 formSelector: '.form',
 inputSelector: '.form__field',
 buttonSelector: '.form__submit-button',
-disabledButtonClass: '.form__submit-button_disabled',
-inputErrorClass: '.form__field_type_error'
+disabledButtonClass: 'form__submit-button_disabled',
+inputErrorClass: 'form__field_type_error',
 });
 
+enableValidation({
+  formSelector: '.form_type_add',
+  inputSelector: '.form__field',
+  buttonSelector: '.form__submit-button_add',
+  disabledButtonClass: 'form__submit-button_disabled',
+  inputErrorClass: 'form__field_type_error',
+  });

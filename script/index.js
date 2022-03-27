@@ -7,6 +7,9 @@ const template = document.querySelector('.card-template').content;
 
 const popup = document.querySelector('.popup');
 
+// BODY CONST__________________________________
+const body = document.querySelector('.page');
+
 
 // POPUP ADD CONST __________________________________________________________
 
@@ -168,3 +171,19 @@ buttonEditClose.addEventListener('click', closePopupEdit);
 buttonAddClose.addEventListener('click', closePopupAdd);
 popupPicClose.addEventListener('click', closePopupPic);
 formEdit.addEventListener('submit', submitForm);
+
+body.addEventListener('keydown',  function (evt) {
+  if(evt.key === 'Escape') {
+    closePopupPic();
+    closePopupEdit();
+    closePopupAdd();
+  }
+});
+
+body.addEventListener('click',  function (evt) {
+  if(evt.target.classList.contains('popup')) {
+  closePopupPic();
+  closePopupEdit();
+  closePopupAdd();
+  }
+});
