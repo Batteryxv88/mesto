@@ -23,7 +23,6 @@ const checkButtonValidity =({disabledButtonClass}, form, button) => {
   }
 }
 
-
 function enableValidation({formSelector, inputSelector, buttonSelector, ...rest}) {
   const form = document.querySelector(formSelector);
 
@@ -57,3 +56,4 @@ enableValidation({
   disabledButtonClass: 'form__submit-button_disabled',
   inputErrorClass: 'form__field_type_error',
   });
+  

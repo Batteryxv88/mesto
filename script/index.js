@@ -7,9 +7,6 @@ const template = document.querySelector('.card-template').content;
 
 const popup = document.querySelector('.popup');
 
-// BODY CONST__________________________________
-const body = document.querySelector('.page');
-
 
 // POPUP ADD CONST __________________________________________________________
 
@@ -58,19 +55,19 @@ function renderItem(item) {
 };
 
 function render() {
-  initialCards.forEach(stockCards);
+  initialCards.forEach(renderStockCards);
 };
 
 //исходные карточки
-function stockCards(text) {  
+function renderStockCards(text) {  
   elements.prepend(renderItem(text));
 };
 
 //создание новой карточки, внесение данных
-function newCard(event) {
+function createNewCard(event) {
   event.preventDefault();
-  stockCards({ name: nameAdd.value, link: linkAdd.value });
-  closePopupAdd();
+  renderStockCards({ name: nameAdd.value, link: linkAdd.value });
+  closePopup(popupAdd);
 };
 
 render();
@@ -101,12 +98,12 @@ function handleDelete(event) {
 function createCard() {
   linkAdd.value = "";
   nameAdd.value = "";
-  popupOpen(popupAdd);
+  openPopup(popupAdd);
 };
 
 // вставляем данные попапа Image
 function openPopupPic(data) {
-  popupOpen(popupPicBox);
+  openPopup(popupPicBox);
   popupImg.src = data.link;
   label.textContent = data.name;
   popupImg.alt = data.name;
@@ -124,66 +121,61 @@ function fillInputForm() {
   jobInput.value = jobOutput.textContent;
 };
 
-// открытие попапа
-function popupOpen(popup) {   
-  popup.classList.add('popup_active');
-};
+// функция сброса кнопки submit add
+function resetButton() {
+  const buttonSubmit = document.querySelector('.form__submit-button_add');
+  buttonSubmit.setAttribute('disabled', '');
+  buttonSubmit.classList.add('form__submit-button_disabled');
+}
 
-// открытие попапа Edit
-function openPopupEdit() {   
-  popupEdit.classList.add('popup_active');
-  fillInputForm()
+// открытие попапа
+function openPopup(popup) {
+  popup.classList.add('popup_active');
 };
 
 // закрытие попапа
 function closePopup(popup) {      
   popup.classList.remove('popup_active');
-};
-
-// закрытие попапа Add
-function closePopupAdd() {
-  closePopup(popupAdd);
-};
-
-// закрытие попапа Edit
-function closePopupEdit() {
-  closePopup(popupEdit);
-};
-
-// закрытие попапа Image
-function closePopupPic() {      
-  popupPicBox.classList.remove('popup_active');
+  resetButton();
 };
 
 // отправка, закрытие формы Edit
 function submitForm(evt) {
   evt.preventDefault();
   fillEditForm();
-  closePopupEdit();
+  closePopup(popupEdit);
 };
 
 // LISTENERS _____________________________________________
 
-formAdd.addEventListener('submit', newCard);
-buttonFormOpen.addEventListener('click', openPopupEdit);
+formAdd.addEventListener('submit', createNewCard);
+buttonFormOpen.addEventListener('click', function() {
+  openPopup(popupEdit);
+  fillInputForm();
+});
+
 buttonFormOpenAdd.addEventListener('click', createCard);
-buttonEditClose.addEventListener('click', closePopupEdit);
-buttonAddClose.addEventListener('click', closePopupAdd);
-popupPicClose.addEventListener('click', closePopupPic);
+
+const popups = document.querySelectorAll('.popup')
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_active')) {
+            closePopup(popup)
+        }
+        if (evt.target.classList.contains('popup__close-icon')) {
+          closePopup(popup)
+        }
+    });
+});
+
 formEdit.addEventListener('submit', submitForm);
 
-body.addEventListener('keydown',  function (evt) {
-  if(evt.key === 'Escape') {
-    closePopupPic();
-    closePopupEdit();
-    closePopupAdd();
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_active');
+    closePopup(openedPopup);
+    evt.target.removeEventListener('keydown', closeByEscape);
   }
-});
+}
 
-body.addEventListener('click',  function (evt) {
-  if(evt.target.classList.contains('popup')) {
-  closePopupPic();
-  closePopupEdit();
-  closePopupAdd();
-  }
-});
+document.addEventListener('keydown', closeByEscape);
