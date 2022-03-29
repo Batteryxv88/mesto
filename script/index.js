@@ -131,12 +131,13 @@ function resetButton() {
 // открытие попапа
 function openPopup(popup) {
   popup.classList.add('popup_active');
+  document.addEventListener('keydown', closeByEscape);
 };
 
 // закрытие попапа
 function closePopup(popup) {      
   popup.classList.remove('popup_active');
-  resetButton();
+  document.removeEventListener('keydown', closeByEscape);
 };
 
 // отправка, закрытие формы Edit
@@ -148,7 +149,11 @@ function submitForm(evt) {
 
 // LISTENERS _____________________________________________
 
-formAdd.addEventListener('submit', createNewCard);
+formAdd.addEventListener('submit', function() {
+  createNewCard(event);
+  resetButton();
+});
+
 buttonFormOpen.addEventListener('click', function() {
   openPopup(popupEdit);
   fillInputForm();
@@ -159,12 +164,12 @@ buttonFormOpenAdd.addEventListener('click', createCard);
 const popups = document.querySelectorAll('.popup')
 popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_active')) {
-            closePopup(popup)
-        }
-        if (evt.target.classList.contains('popup__close-icon')) {
-          closePopup(popup)
-        }
+      if (evt.target.classList.contains('popup_active')) {
+          closePopup(popup);
+      }
+      if (evt.target.classList.contains('popup__close-icon')) {
+        closePopup(popup);
+      }
     });
 });
 
@@ -174,8 +179,5 @@ function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_active');
     closePopup(openedPopup);
-    evt.target.removeEventListener('keydown', closeByEscape);
   }
 }
-
-document.addEventListener('keydown', closeByEscape);
