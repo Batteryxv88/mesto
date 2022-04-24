@@ -1,7 +1,5 @@
 export {FormValidator};
 
-const formAdd = document.querySelector('.form_type_add');
-const formEdit = document.querySelector('.form_type_edit');
 
 class FormValidator {
   constructor(data, formSelector) {
@@ -12,10 +10,6 @@ class FormValidator {
     this._formSelector = formSelector;
   }
 
-  _formSubmit(evt) {
-    evt.preventDefault();
-  }
-  
   _checkInputValidity(input) {
     const errorMessage =  this._formSelector.querySelector(`#error-${input.id}`);
 
@@ -28,23 +22,28 @@ class FormValidator {
     }
   }
   
-  _checkButtonValidity() {
-    const button = this._formSelector.querySelector(this._buttonSelector);
+  _checkButtonValidity = () => {
     if (this._formSelector.checkValidity()) {
-      button.removeAttribute('disabled');
-      button.classList.remove(this._disabledButtonClass);        
+      this.toggleButtonStateActive();    
     } else {
-      button.setAttribute('disabled', '');
-      button.classList.add(this._disabledButtonClass);
+      this.toggleButtonStateOff();
     }
   }
   
+  toggleButtonStateActive = () => {
+    const buttonSubmit = this._formSelector.querySelector(this._buttonSelector);
+    buttonSubmit.removeAttribute('disabled');
+    buttonSubmit.classList.remove('form__submit-button_disabled');
+  }
+
+  toggleButtonStateOff = () => {
+    const buttonSubmit = this._formSelector.querySelector(this._buttonSelector);
+    buttonSubmit.setAttribute('disabled', '');
+    buttonSubmit.classList.add('form__submit-button_disabled');
+  }
+
   enableValidation() {
     const form = this._formSelector;
-  
-    form.addEventListener('submit', this._formSubmit);
-    
-    console.log(form.target);
       
     const inputs = form.querySelectorAll(this._inputSelector);
     const button = form.querySelector(this._buttonSelector);
@@ -59,21 +58,3 @@ class FormValidator {
     });
   }
 }
-
-//запуск валидации
-function startValidate(formItem) {
-  const data = {
-    inputSelector: '.form__field',
-    buttonSelector: '.form__submit-button',
-    disabledButtonClass: 'form__submit-button_disabled',
-    inputErrorClass: 'form__field_type_error',
-    }
-    const form = formItem;
-
-  const formValidated = new FormValidator(data, form);
-  formValidated.enableValidation();
-}
-
-startValidate(formAdd);
-
-startValidate(formEdit);

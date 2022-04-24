@@ -1,34 +1,7 @@
 import { FormValidator } from "./FormValidator.js";
-import { renderElements } from "./Card.js";
-export {initialCards};
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
-
+import { Card } from "./Card.js";
+import { initialCards } from "./initialCards.js";
+export {initialCards, openPopup};
 
 
 const linkAdd = document.querySelector('.form__field_add_link');
@@ -43,6 +16,92 @@ const jobOutput = document.querySelector('.profile__subtitle');
 const formAdd = document.querySelector('.form_type_add');
 const buttonFormOpenAdd = document.querySelector('.profile__add-button');
 const formEdit = document.querySelector('.form_type_edit');
+const elements = document.querySelector('.elements');
+const template = document.querySelector('.card-template').content;
+const popupPicBox = document.querySelector('.picture');
+const popupImg = document.querySelector('.popup__img');
+const label = document.querySelector('.popup__label');
+
+const formData = {
+  inputSelector: '.form__field',
+  buttonSelector: '.form__submit-button',
+  disabledButtonClass: 'form__submit-button_disabled',
+  inputErrorClass: 'form__field_type_error',
+  }
+
+
+//рендер карточек
+const renderElements = (data) => {
+  data.forEach((item) => {
+    const card = new Card(item, '.card-template');
+
+    const cardElement = card.generateCard();
+    elements.prepend(cardElement);
+  }); 
+}
+
+//запуск валидации
+function startValidate(data, formItem) {
+  const formData = data;
+    const form = formItem;
+
+  const formValidated = new FormValidator(data, form);
+  formValidated.enableValidation();
+}
+
+startValidate(formData, formAdd);
+
+startValidate(formData, formEdit);
+
+//присвоение данных для карточки
+function renderItem(item) {
+  const box = template.cloneNode(true);
+  box.querySelector('.element__title').textContent = item.name;
+  box.querySelector('.element__image').src = item.link;
+  box.querySelector('.element__image').alt = item.name;
+  addListeners(box, item);
+  return box;
+};
+
+//вешаем слушатели на карточку
+function addListeners(el, data) {
+  el.querySelector('.element__trash').addEventListener('click', handleDelete);
+  el.querySelector('.element__like').addEventListener('click', elementLike);
+  el.querySelector('.element__image').addEventListener('click', function () {
+  openPopupPic(data)
+  });
+};
+
+// вставляем данные попапа Image
+function openPopupPic(data) {
+  openPopup(popupPicBox);
+  popupImg.src = data.link;
+  label.textContent = data.name;
+  popupImg.alt = data.name;
+};
+
+// лайк карточки
+function elementLike(event) {
+  event.target.closest('.element__like').classList.toggle('element__like_active');
+};
+
+// удаление карточки
+function handleDelete(event) {
+  event.target.closest('.element').remove();
+};
+
+//исходные карточки
+function renderStockCards(text) {  
+  elements.prepend(renderItem(text));
+};
+
+//создание новой карточки, внесение данных
+function createNewCard(event) {
+  event.preventDefault();
+  renderStockCards({ name: nameAdd.value, link: linkAdd.value });
+  closePopup(popupAdd);
+  resetButton();
+};
 
 //временный массив
 const midtermArr = [
@@ -53,16 +112,6 @@ function prepareNewCard(data) {
   const link = linkAdd.value;
   const name = nameAdd.value;
   data.push({name: name, link: link})
-}
-
-//рендер новой карточки, очищение временного массива
-function renderNewCard(event) {
-event.preventDefault();
-prepareNewCard(midtermArr);
-renderElements(midtermArr);
-closePopup(popupAdd);
-resetButton();
-midtermArr.length = 0;
 }
 
 //рендер стоковых карточек
@@ -87,11 +136,9 @@ function fillInputForm() {
   jobInput.value = jobOutput.textContent;
 };
 
-// функция сброса кнопки submit add
 function resetButton() {
-  const buttonSubmit = document.querySelector('.form__submit-button_add');
-  buttonSubmit.setAttribute('disabled', '');
-  buttonSubmit.classList.add('form__submit-button_disabled');
+  const formValidator = new FormValidator(formData, formAdd)
+  formValidator.toggleButtonStateOff();
 }
 
 // открытие попапа
@@ -144,4 +191,4 @@ popups.forEach((popup) => {
 
 formEdit.addEventListener('submit', submitForm);
 
-formAdd.addEventListener('submit', renderNewCard);
+formAdd.addEventListener('submit', createNewCard);
