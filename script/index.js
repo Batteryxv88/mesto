@@ -3,7 +3,6 @@ import { Card } from "./Card.js";
 import { initialCards } from "./initialCards.js";
 export {openPopup};
 
-const form = document.querySelector('.form')
 const linkAdd = document.querySelector('.form__field_add_link');
 const nameAdd = document.querySelector('.form__field_add_name');
 const popupAdd = document.querySelector('.popup_form_add');
@@ -17,13 +16,14 @@ const formAdd = document.querySelector('.form_type_add');
 const buttonFormOpenAdd = document.querySelector('.profile__add-button');
 const formEdit = document.querySelector('.form_type_edit');
 const elements = document.querySelector('.elements');
-const template = document.querySelector('.card-template').content;
-const popupPicBox = document.querySelector('.picture');
-const popupImg = document.querySelector('.popup__img');
-const label = document.querySelector('.popup__label');
 
 
-
+const formData = {
+  inputSelector: '.form__field',
+  buttonSelector: '.form__submit-button',
+  disabledButtonClass: 'form__submit-button_disabled',
+  inputErrorClass: 'form__field_type_error',
+}
 
 //создание карточки
 const createCard = (data) => {
@@ -32,6 +32,7 @@ const createCard = (data) => {
     return card.generateCard();
 }
 
+//вставка карточки
 const insertCard = (item) => {
   elements.prepend(createCard(item));
 }
@@ -45,48 +46,15 @@ const renderCards = (dataList) => {
 
 renderCards(initialCards);
 
-
-//запуск валидации
-/*
+//функция валидации
 function startValidate(data, formItem) {
-  const formData = data;
-    const form = formItem;
-
-  const formValidated = new FormValidator(formData, form);
+  const formValidated = new FormValidator(data, formItem);
   formValidated.enableValidation();
+  return formValidated;
 }
 
-startValidate(formData, formAdd);
-
-startValidate(formData, formEdit);
-*/
-
-const formData = {
-  inputSelector: '.form__field',
-  buttonSelector: '.form__submit-button',
-  disabledButtonClass: 'form__submit-button_disabled',
-  inputErrorClass: 'form__field_type_error',
-}
-
-const formValidators = {};
-
-// Включение валидации
-const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((formElement) => {
-    const validator = new FormValidator(formElement, config);
-   // вот тут в объект записываем под именем формы
-    formValidators[ formElement.name ] = validator;
-    validator.enableValidation();
-  });
-};
-
-const formValidated = new FormValidator(formData, formEdit);
-enableValidation(formValidated);
-
-
-
-
+const editFormValidator = startValidate(formData, formEdit);
+const addFormValidator = startValidate(formData, formAdd);
 
 
 //создание новой карточки, внесение данных
@@ -94,7 +62,7 @@ function createNewCard(event) {
   event.preventDefault();
   insertCard({ name: nameAdd.value, link: linkAdd.value });
   closePopup(popupAdd);
-  //resetButton();
+  resetButton();
 };
 
 //очищение полей, открытие попапа Add
@@ -117,8 +85,7 @@ function fillInputForm() {
 };
 
 function resetButton() {
-  const formValidator = new FormValidator(formData, formAdd)
-  formValidator.toggleButtonStateOff();
+  addFormValidator.toggleButtonStateOff();
 }
 
 // открытие попапа
