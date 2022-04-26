@@ -1,9 +1,9 @@
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
 import { initialCards } from "./initialCards.js";
-export {initialCards, openPopup};
+export {openPopup};
 
-
+const form = document.querySelector('.form')
 const linkAdd = document.querySelector('.form__field_add_link');
 const nameAdd = document.querySelector('.form__field_add_name');
 const popupAdd = document.querySelector('.popup_form_add');
@@ -22,103 +22,83 @@ const popupPicBox = document.querySelector('.picture');
 const popupImg = document.querySelector('.popup__img');
 const label = document.querySelector('.popup__label');
 
-const formData = {
-  inputSelector: '.form__field',
-  buttonSelector: '.form__submit-button',
-  disabledButtonClass: 'form__submit-button_disabled',
-  inputErrorClass: 'form__field_type_error',
-  }
 
 
-//рендер карточек
-const renderElements = (data) => {
-  data.forEach((item) => {
-    const card = new Card(item, '.card-template');
 
-    const cardElement = card.generateCard();
-    elements.prepend(cardElement);
-  }); 
+//создание карточки
+const createCard = (data) => {
+    const card = new Card(data, '.card-template');
+    card.generateCard();
+    return card.generateCard();
 }
 
+const insertCard = (item) => {
+  elements.prepend(createCard(item));
+}
+
+//рендер карточек
+const renderCards = (dataList) => {
+  dataList.forEach((item) => {
+    insertCard(item);
+  });
+}
+
+renderCards(initialCards);
+
+
 //запуск валидации
+/*
 function startValidate(data, formItem) {
   const formData = data;
     const form = formItem;
 
-  const formValidated = new FormValidator(data, form);
+  const formValidated = new FormValidator(formData, form);
   formValidated.enableValidation();
 }
 
 startValidate(formData, formAdd);
 
 startValidate(formData, formEdit);
+*/
 
-//присвоение данных для карточки
-function renderItem(item) {
-  const box = template.cloneNode(true);
-  box.querySelector('.element__title').textContent = item.name;
-  box.querySelector('.element__image').src = item.link;
-  box.querySelector('.element__image').alt = item.name;
-  addListeners(box, item);
-  return box;
-};
+const formData = {
+  inputSelector: '.form__field',
+  buttonSelector: '.form__submit-button',
+  disabledButtonClass: 'form__submit-button_disabled',
+  inputErrorClass: 'form__field_type_error',
+}
 
-//вешаем слушатели на карточку
-function addListeners(el, data) {
-  el.querySelector('.element__trash').addEventListener('click', handleDelete);
-  el.querySelector('.element__like').addEventListener('click', elementLike);
-  el.querySelector('.element__image').addEventListener('click', function () {
-  openPopupPic(data)
+const formValidators = {};
+
+// Включение валидации
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, config);
+   // вот тут в объект записываем под именем формы
+    formValidators[ formElement.name ] = validator;
+    validator.enableValidation();
   });
 };
 
-// вставляем данные попапа Image
-function openPopupPic(data) {
-  openPopup(popupPicBox);
-  popupImg.src = data.link;
-  label.textContent = data.name;
-  popupImg.alt = data.name;
-};
+const formValidated = new FormValidator(formData, formEdit);
+enableValidation(formValidated);
 
-// лайк карточки
-function elementLike(event) {
-  event.target.closest('.element__like').classList.toggle('element__like_active');
-};
 
-// удаление карточки
-function handleDelete(event) {
-  event.target.closest('.element').remove();
-};
 
-//исходные карточки
-function renderStockCards(text) {  
-  elements.prepend(renderItem(text));
-};
+
+
 
 //создание новой карточки, внесение данных
 function createNewCard(event) {
   event.preventDefault();
-  renderStockCards({ name: nameAdd.value, link: linkAdd.value });
+  insertCard({ name: nameAdd.value, link: linkAdd.value });
   closePopup(popupAdd);
-  resetButton();
+  //resetButton();
 };
 
-//временный массив
-const midtermArr = [
-];
-
-//помещаем инпуты во временный массив
-function prepareNewCard(data) {
-  const link = linkAdd.value;
-  const name = nameAdd.value;
-  data.push({name: name, link: link})
-}
-
-//рендер стоковых карточек
-renderElements(initialCards);
-
 //очищение полей, открытие попапа Add
-function createCard() {
+function openAddCardPopup() {
   linkAdd.value = "";
   nameAdd.value = "";
   openPopup(popupAdd);
@@ -170,7 +150,7 @@ function submitForm(evt) {
 
 // LISTENERS _____________________________________________
 
-buttonFormOpenAdd.addEventListener('click', createCard);
+buttonFormOpenAdd.addEventListener('click', openAddCardPopup);
 
 buttonFormOpen.addEventListener('click', function() {
   openPopup(popupEdit);

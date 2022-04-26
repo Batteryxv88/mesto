@@ -37,7 +37,6 @@ class Card {
     popupImg.alt = this._name;
     label.textContent = this._name;
     openPopup(popupPicBox);
-    document.addEventListener('keydown', this._closeByEscape);
   }
 
   _deleteHandler = () => {
