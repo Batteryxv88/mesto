@@ -28,7 +28,6 @@ const formData = {
 //создание карточки
 const createCard = (data) => {
     const card = new Card(data, '.card-template');
-    card.generateCard();
     return card.generateCard();
 }
 
