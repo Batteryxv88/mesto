@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+
+<body class="page">
+  <header class="header">
+    <div class="header__logo"></div>
+  </header>
+  <main>
+    <section class="profile">
+      <div class="profile__avatar"></div>
+      <div class="profile__group">
+        <div class="profile__info">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="profile__edit-button edit-button" aria-label="edit" type="button"></button>
+      </div>
+      <button class="profile__add-button add-button" type="button"></button>
+    </section>
+    <div class="elements">
+
+    </div>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
+  </footer>
+  <div class="popup popup_type_form-edit">
+    <div class="popup__container">
+      <form class="form form_type_edit" name="editProfileForm" method="POST">
+        <h2 class="form__title">Редактировать профиль</h2>
+        <input type="text" required id="name" name="name" value="" minlength="2" maxlength="40" class="form__field form__field_value_name">
+        <span id="error-name" class="error-message error-message_visible"></span>
+        <input type="text" required id="job" name="job" value="" minlength="2" maxlength="200" class="form__field form__field_value_job">
+        <span id="error-job" class="error-message error-message_visible"></span>
+        <button id="button" class="form__submit-button form__submit-button_type_edit" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close-icon popup__close-icon_form_edit" type="button"></button>
+    </div>
+  </div>
+  <div class="popup popup_form_add">
+    <div class="popup__container">
+      <form class="form form_type_add" name="editProfileForm" method="POST">
+        <h2 class="form__title">Новое место</h2>
+        <input type="text" required id="name2" name="name2" value="" minlength="2" maxlength="30" placeholder="Название" class="form__field form__field_add_name">
+        <span id="error-name2" class="error-message error-message_visible error-message_add"></span>
+        <input type="url" required id="url" name="url" value="" placeholder="Ссылка на картинку"
+          class="form__field form__field_add_link">
+        <span id="error-url" class="error-message error-message_visible"></span>
+        <button class="form__submit-button form__submit-button_add" type="submit">Создать</button>
+      </form> 
+      <button class="popup__close-icon popup__close-icon_form_add" type="button"></button>
+    </div>
+  </div>
+
+  <div class="popup picture">
+    <div class="popup__box">
+      <div class="popup__group">
+        <img class="popup__img" src="#" alt="#">
+        <p class="popup__label"></p>
+      </div>
+      <button class="popup__close-icon popup__close-img"></button>
+    </div>
+  </div>
+
+  <template class="card-template">
+    <div class="element">
+      <img class="element__image" src="#" alt="#">
+      <div class="element__group">
+        <h2 class="element__title"></h2>
+        <button class="element__like" type="button"></button>
+      </div>
+      <div class="element__trash"></div>
+    </div>
+  </template>
+
+
+
+
+</body>
+
+</html>
