@@ -1,35 +1,27 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor(selector, handleFormSubmit) {
-    super(selector);
+  constructor(popup, handleFormSubmit) {
+    super(popup);
     this._handleFormSubmit = handleFormSubmit;
-    this._inputs = this._selector.querySelectorAll('.form__field');
-    this._formAdd = document.querySelector('.form_type_add');
-    this._input1 = this._inputs[0];
-    this._input2 = this._inputs[1];
-    this._nameInput = document.querySelector('.form__field_value_name');
-    this._jobInput = document.querySelector('.form__field_value_job');
+    this._inputList = this._popup.querySelectorAll('.form__field');
   }
 
   _getInputValues() {
-    return {
-      name: this._input1.value,
-      link: this._input2.value
-    };
-  }
-
-  setInputValues({name, job}) {
-    this._nameInput.value = name;
-    this._jobInput.value = job;
+    this._formValues = {};
+    this._inputList.forEach(input => this._formValues[input.name] = input.value);
+    return this._formValues;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._selector.addEventListener('submit', (evt) => {
+    this._popup.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      this._formAdd.reset();
+      if (evt.target.classList.contains('form_type_add')) {
+        this._popup.querySelector('.form_type_add').reset();
+      }
+      this.close()
     })
   }
 }

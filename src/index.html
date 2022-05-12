@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 
@@ -50,9 +49,9 @@
     <div class="popup__container">
       <form class="form form_type_add" name="editProfileForm" method="POST">
         <h2 class="form__title">Новое место</h2>
-        <input type="text" required id="name2" name="name2" value="" minlength="2" maxlength="30" placeholder="Название" class="form__field form__field_add_name">
+        <input type="text" required id="name2" name="name" value="" minlength="2" maxlength="30" placeholder="Название" class="form__field form__field_add_name">
         <span id="error-name2" class="error-message error-message_visible error-message_add"></span>
-        <input type="url" required id="url" name="url" value="" placeholder="Ссылка на картинку"
+        <input type="url" required id="url" name="link" value="" placeholder="Ссылка на картинку"
           class="form__field form__field_add_link">
         <span id="error-url" class="error-message error-message_visible"></span>
         <button class="form__submit-button form__submit-button_add" type="submit">Создать</button>
