@@ -10,7 +10,6 @@ import { nameInput, jobInput, buttonFormOpen, nameOutput,
   elements, formData } from "../utils/constants.js";
 import './index.css';
 
-
 const defaultCardList = new Section({ 
   items: initialCards,
     renderer: (item) => {
