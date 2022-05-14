@@ -5,6 +5,8 @@ export default class PopupWithForm extends Popup {
     super(popup);
     this._handleFormSubmit = handleFormSubmit;
     this._inputList = this._popup.querySelectorAll('.form__field');
+    this._form = this._popup.querySelector('.form');
+    this._formAdd = this._popup.querySelector('.form_type_add')
   }
 
   _getInputValues() {
@@ -13,15 +15,19 @@ export default class PopupWithForm extends Popup {
     return this._formValues;
   }
 
+  close() {
+    super.close();
+    if (this._popup.contains(this._formAdd)) { 
+      this._form.reset();
+    }
+  }
+
   setEventListeners() {
     super.setEventListeners();
-    this._popup.addEventListener('submit', (evt) => {
+    this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      if (evt.target.classList.contains('form_type_add')) {
-        this._popup.querySelector('.form_type_add').reset();
-      }
-      this.close()
+      this.close();
     })
   }
 }
