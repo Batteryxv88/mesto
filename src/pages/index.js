@@ -11,11 +11,11 @@ import './index.css';
 
 const popupImage = new PopupWithImage('.picture');
 
+
 const renderCard = (item) => {
   const card = new Card({data: item, 
     handleCardClick: () => {
       popupImage.open(item);
-      popupImage.setEventListeners();
     }
   },'.card-template');
   const cardElement = card.generateCard();
@@ -34,18 +34,14 @@ const defaultCardList = new Section({
 const newCardAdd = new PopupWithForm('.popup_form_add',
     (item) => {
       renderCard(item);
-      //newCardAdd.close();
       addFormValidator.toggleButtonStateOff();
     }
 );
 
 const userInfo = new UserInfo({name: '.profile__title', job:'.profile__subtitle'});
 
-
 const popupWithFormEdit = new PopupWithForm('.popup_type_form-edit', (data) => {
-  popupWithFormEdit.setEventListeners();
   userInfo.setUserInfo(data);
-  popupWithFormEdit.close();
 });
 
 //функция валидации
@@ -63,15 +59,14 @@ function fillForm({name, job}) {
 const editFormValidator = startValidate(formData, formEdit);
 const addFormValidator = startValidate(formData, formAdd);
 
-
 defaultCardList.renderItems();
 newCardAdd.setEventListeners();
 popupWithFormEdit.setEventListeners();
+popupImage.setEventListeners();
 
 buttonFormOpenAdd.addEventListener('mousedown', () => {
   newCardAdd.open();
 });
-
 
 buttonFormOpen.addEventListener('mousedown', () => {
   fillForm(userInfo.getUserInfo());

@@ -6,7 +6,6 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._inputList = this._popup.querySelectorAll('.form__field');
     this._form = this._popup.querySelector('.form');
-    this._formAdd = this._popup.querySelector('.form_type_add')
   }
 
   _getInputValues() {
@@ -17,9 +16,7 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    if (this._popup.contains(this._formAdd)) { 
-      this._form.reset();
-    }
+    this._form.reset();
   }
 
   setEventListeners() {
